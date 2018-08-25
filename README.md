@@ -1,6 +1,6 @@
 # ickafka
 
-Improved Color Kafka Consumer
+A kafka consumer with color.
 
 ## Installation
 
