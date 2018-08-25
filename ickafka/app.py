@@ -33,4 +33,4 @@ for count, message in enumerate(consumer):
         print(highlight(message, JsonLexer(), TerminalFormatter()))
     except Exception:
         print(message)
-    print(count+1)
+    print("message count: {}".format(count+1))
