@@ -24,7 +24,7 @@ setup(
     description='Improved Color Kafka',
     entry_points={
         'console_scripts': [
-            'ickafka = ickafka.app',
+            'ickafka=ickafka.app:main',
         ],
     },
     install_requires=REQUIREMENTS,
