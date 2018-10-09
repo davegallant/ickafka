@@ -60,7 +60,7 @@ disable=
     missing-docstring,
     no-value-for-parameter,
     protected-access,
-    superfluous-parens
+    superfluous-parens,
     too-few-public-methods,
 
 [LOGGING]

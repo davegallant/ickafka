@@ -36,7 +36,7 @@ def main():
     )
 
     # print each message that is consumed
-    for count, message in enumerate(consumer):
+    for count, message in enumerate(consumer, 1):
         try:
             message = message.value.decode("utf-8")
             message = json.loads(message)
@@ -44,4 +44,4 @@ def main():
             print(highlight(message, JsonLexer(), TerminalFormatter()))
         except Exception:  # pylint: disable=broad-except
             print(message)
-        print("message count: {}".format(count + 1))
+        print("message count: {}".format(count))
