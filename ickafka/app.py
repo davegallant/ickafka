@@ -4,8 +4,8 @@ import argparse
 import json
 from kafka import KafkaConsumer
 from pygments import highlight
-from pygments.formatters import TerminalFormatter
-from pygments.lexers import JsonLexer
+from pygments.formatters import TerminalFormatter  # pylint: disable-msg=E0611
+from pygments.lexers import JsonLexer  # pylint: disable-msg=E0611
 
 
 def main():
