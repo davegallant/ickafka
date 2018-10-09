@@ -13,5 +13,5 @@ pip install ickafka
 ## Usage
 
 ```bash
-ickafka [-h] [-s SERVER] [-g GROUP] -t TOPIC
+ickafka [-h] [-s SERVER] [-g GROUP] [-o OFFSET] -t TOPIC
 ```
