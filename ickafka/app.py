@@ -10,15 +10,18 @@ from pygments.lexers import JsonLexer
 # parse the args
 parser = argparse.ArgumentParser(description='Consume from kafka')
 parser.add_argument(
-    '-s', '--server', help='Kafka broker ip or hostname', default="localhost")
+    '-s', '--server', help='Kafka broker ip or hostname', default='localhost')
 parser.add_argument(
-    '-g', '--group', help='kafka consumer group', default="defaultgroup")
+    '-g', '--group', help='kafka consumer group', default='ickafkadefault')
+parser.add_argument(
+    '-o', '--offset', help='which offset to start at. options: smallest, earliest, latest', default='latest')
 parser.add_argument('-t', '--topic', help='Kafka topic name', required=True)
 args = parser.parse_args()
 
 # start consuming them bytes
 consumer = KafkaConsumer(
     args.topic,
+    auto_offset_reset=args.offset,
     bootstrap_servers=[args.server],
     enable_auto_commit=True,
     group_id=args.group,
