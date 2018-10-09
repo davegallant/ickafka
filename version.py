@@ -1,1 +1,0 @@
-ickafka/__version__.py
