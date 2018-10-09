@@ -4,13 +4,13 @@ python:
   - "2.7"
   - "3.5"
   - "3.6"
-  # - "3.7"
+  - "3.7"
 before_install:
 - "pip install -U pip"
 - "python setup.py install"
 install:
   - pip install tox-travis
-  - pip install pytest==3.6.0
+  - pip install pytest
   - pip install pylint
 script:
   - tox

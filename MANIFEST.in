@@ -1,2 +1,2 @@
+include ickafka/__version__.py
 include requirements.txt
-include version.py
