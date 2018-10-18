@@ -20,7 +20,7 @@ Start a consumer at the latest offset:
 ickafka -s localhost -t my_test_topic
 ```
 
-To specify a consumer group name:
+To specify a consumer group name (default is None):
 
 ```bash
 ickafka -s localhost -t my_test_topic -g testgroup

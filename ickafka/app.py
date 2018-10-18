@@ -14,9 +14,7 @@ def main():
     parser.add_argument(
         "-s", "--server", help="kafka broker ip or hostname", default="localhost"
     )
-    parser.add_argument(
-        "-g", "--group", help="kafka consumer group", default="ickafkadefault"
-    )
+    parser.add_argument("-g", "--group", help="kafka consumer group", default=None)
     parser.add_argument(
         "-o",
         "--offset",
@@ -45,3 +43,6 @@ def main():
         except Exception:  # pylint: disable=broad-except
             print(message)
         print("message count: {}".format(count))
+
+
+main()
