@@ -2,6 +2,7 @@
 
 import argparse
 import json
+from ickafka.__version__ import version
 from kafka import KafkaConsumer
 from pygments import highlight
 from pygments.formatters import TerminalFormatter  # pylint: disable-msg=E0611
@@ -22,6 +23,14 @@ def main():
         default="latest",
     )
     parser.add_argument("-t", "--topic", help="kafka topic name", required=True)
+    parser.add_argument(
+        "-v",
+        "--version",
+        action="version",
+        version=version,
+        help="ickafka version",
+        default=None,
+    )
     args = parser.parse_args()
 
     # start consuming them bytes
