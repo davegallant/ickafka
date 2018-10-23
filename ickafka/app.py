@@ -6,11 +6,11 @@ import json
 import os
 import sys
 from datetime import datetime
-from ickafka.__version__ import version
 from kafka import KafkaConsumer
 from pygments import highlight
 from pygments.formatters import TerminalFormatter  # pylint: disable-msg=E0611
 from pygments.lexers import JsonLexer  # pylint: disable-msg=E0611
+from ickafka.__version__ import version
 
 
 CAPTURED_MESSAGES = []
@@ -75,7 +75,8 @@ def start_consumer(arguments):
 
 
 def exit_handler():
-    # If there are captured messages and the capture flag is set to true, dump messages as a json list
+    # If there are captured messages and the capture flag is set to true,
+    # dump messages as a json array
     if CAPTURED_MESSAGES and USE_CAPTURE:
         json_dumped_file = "{}/ickafka_dump_{}.json".format(
             os.getcwd(), datetime.utcnow().isoformat()
