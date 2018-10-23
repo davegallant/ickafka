@@ -13,8 +13,13 @@ from pygments.formatters import TerminalFormatter  # pylint: disable-msg=E0611
 from pygments.lexers import JsonLexer  # pylint: disable-msg=E0611
 
 
-def main():
-    # parse the args
+CAPTURED_MESSAGES = []
+USE_CAPTURE = False
+
+
+def get_args():
+    """Parse args using argparse"""
+
     parser = argparse.ArgumentParser(description="Consume from kafka")
     parser.add_argument(
         "-s", "--server", help="kafka broker ip or hostname", default="localhost"
@@ -27,6 +32,8 @@ def main():
         default="latest",
     )
     parser.add_argument("-t", "--topic", help="kafka topic name", required=True)
+    parser.add_argument("--capture", dest="capture", action="store_true")
+    parser.add_argument("--no-color", dest="no_color", action="store_true")
     parser.add_argument(
         "-v",
         "--version",
@@ -35,19 +42,19 @@ def main():
         help="ickafka version",
         default=None,
     )
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def start_consumer(arguments):
 
     # start consuming them bytes
     consumer = KafkaConsumer(
-        args.topic,
-        auto_offset_reset=args.offset,
-        bootstrap_servers=[args.server],
+        arguments.topic,
+        auto_offset_reset=arguments.offset,
+        bootstrap_servers=[arguments.server],
         enable_auto_commit=True,
-        group_id=args.group,
+        group_id=arguments.group,
     )
-
-    global captured_messages
-    captured_messages = []
 
     # print each message that is consumed
     for count, message in enumerate(consumer, 1):
@@ -55,31 +62,41 @@ def main():
         try:
             message = json.loads(message)
             message = json.dumps(message, indent=4, sort_keys=True)
-            print(highlight(message, JsonLexer(), TerminalFormatter()))
-            captured_messages.append(json.loads(message))
+            if arguments.no_color:
+                print(message)
+            else:
+                print(highlight(message, JsonLexer(), TerminalFormatter()))
+            CAPTURED_MESSAGES.append(json.loads(message))
         except Exception:  # pylint: disable=broad-except
             print(message)
-            captured_messages.append(message)
-        print("message count: {}".format(count))
+            CAPTURED_MESSAGES.append(message)
+        print("messages consumed: {}".format(count))
+        print("")
 
 
 def exit_handler():
-    json_dumped_file = "ickafka_dump_%s.json" % datetime.utcnow().isoformat()
-    print("")
-    print("Dumping consumed messages into: %s" % json_dumped_file)
-    print("")
-    with open(json_dumped_file, "w") as outfile:
-        json.dump(captured_messages, outfile)
-    try:
-        sys.exit(0)
-    except SystemExit:
-        os._exit(0)
+    # If there are captured messages and the capture flag is set to true, dump messages as a json list
+    if CAPTURED_MESSAGES and USE_CAPTURE:
+        json_dumped_file = "{}/ickafka_dump_{}.json".format(
+            os.getcwd(), datetime.utcnow().isoformat()
+        )
+        print("")
+        print("Dumping consumed messages into: %s" % json_dumped_file)
+        print("")
+        with open(json_dumped_file, "w") as outfile:
+            json.dump(CAPTURED_MESSAGES, outfile)
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)
 
 
 atexit.register(exit_handler)
 
 try:
-    main()
+    args = get_args()
+    USE_CAPTURE = args.capture
+    start_consumer(arguments=args)
 
 except KeyboardInterrupt:
     exit_handler()
