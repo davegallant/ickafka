@@ -85,7 +85,7 @@ def exit_handler():
         print("Dumping consumed messages into: %s" % json_dumped_file)
         print("")
         with open(json_dumped_file, "w") as outfile:
-            json.dump(CAPTURED_MESSAGES, outfile)
+            json.dump(CAPTURED_MESSAGES, outfile, sort_keys=True, indent=4)
         try:
             sys.exit(0)
         except SystemExit:
