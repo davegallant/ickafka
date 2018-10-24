@@ -4,7 +4,8 @@
 .pypirc
 .pytest_cache/
 .vscode/
-Pipfile**
+Pipfile*
 build/
 dist/
+ickafka_dump_*.json
 venv/

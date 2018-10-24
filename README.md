@@ -4,7 +4,7 @@ A kafka consumer with color.
 
 [![Build Status](https://travis-ci.org/davegallant/ickafka.svg?branch=master)](https://travis-ci.org/davegallant/ickafka)
 
-![ickafka_demo](https://user-images.githubusercontent.com/4519234/44621701-d6516300-a878-11e8-8ab7-752e7b286352.gif)
+![ickafka_demo](https://user-images.githubusercontent.com/4519234/47335349-d55e6700-d658-11e8-9552-260c56caa696.gif)
 
 ## Installation
 
@@ -14,20 +14,32 @@ pip install ickafka
 
 ## Usage
 
-Start a consumer at the latest offset:
+Start consuming at the latest offset:
 
 ```bash
-ickafka -s localhost -t my_test_topic
+ickafka -s localhost:9092 -t my_test_topic
 ```
 
 To specify a consumer group name (default is None):
 
 ```bash
-ickafka -s localhost -t my_test_topic -g testgroup
+ickafka -s localhost:9092 -t my_test_topic -g testgroup
 ```
 
 Consume all messages from the earliest offset:
 
 ```bash
-ickafka -s localhost -t my_test_topic -o earliest
+ickafka -s localhost:9092 -t my_test_topic -o earliest
+```
+
+Capture all consumed messages into a json file:
+
+```bash
+ickafka -s localhost:9092 -t my_test_topic --capture
+```
+
+Disabling color:
+
+```bash
+ickafka -s localhost:9092 -t my_test_topic --no-color
 ```
