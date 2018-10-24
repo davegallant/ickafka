@@ -35,5 +35,11 @@ ickafka -s localhost:9092 -t my_test_topic -o earliest
 Capture all consumed messages into a json file:
 
 ```bash
-ickafka -s localhost:9092 -t my_test_topic -o earliest --capture
+ickafka -s localhost:9092 -t my_test_topic --capture
+```
+
+Disabling color:
+
+```bash
+ickafka -s localhost:9092 -t my_test_topic --no-color
 ```
