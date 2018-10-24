@@ -14,7 +14,6 @@ from ickafka.__version__ import version
 
 
 CAPTURED_MESSAGES = []
-USE_CAPTURE = False
 
 
 def get_args():
@@ -75,11 +74,12 @@ def start_consumer(arguments):
 
 
 def exit_handler():
+    print("Shutting down consumer...")
     # If there are captured messages and the capture flag is set to true,
     # dump messages as a json array
     if CAPTURED_MESSAGES and USE_CAPTURE:
-        json_dumped_file = "{}/ickafka_dump_{}.json".format(
-            os.getcwd(), datetime.utcnow().isoformat()
+        json_dumped_file = "{}/ickafka_capture_{}_{}.json".format(
+            os.getcwd(), KAFKA_TOPIC, datetime.utcnow().isoformat()
         )
         print("")
         print("Dumping consumed messages into: %s" % json_dumped_file)
@@ -97,6 +97,7 @@ atexit.register(exit_handler)
 try:
     args = get_args()
     USE_CAPTURE = args.capture
+    KAFKA_TOPIC = args.topic
     start_consumer(arguments=args)
 
 except KeyboardInterrupt:
