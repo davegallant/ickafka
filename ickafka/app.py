@@ -96,10 +96,10 @@ def exit_handler():
         print("")
         with open(json_dumped_file, "w") as outfile:
             json.dump(CAPTURED_MESSAGES, outfile, sort_keys=True, indent=4)
-        try:
-            sys.exit(0)
-        except SystemExit:
-            os._exit(0)
+    try:
+        sys.exit(0)
+    except SystemExit:
+        os._exit(0)
 
 
 atexit.register(exit_handler)
