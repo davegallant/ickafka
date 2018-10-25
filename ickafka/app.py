@@ -84,6 +84,7 @@ def start_consumer(arguments):
 
 
 def exit_handler():
+    print("")
     print("Shutting down consumer...")
     # If there are captured messages and the capture flag is set to true,
     # dump messages as a json array
