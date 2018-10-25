@@ -4,6 +4,7 @@ import argparse
 import atexit
 import json
 import os
+import os.path
 import sys
 from datetime import datetime
 from kafka import KafkaConsumer
@@ -14,6 +15,15 @@ from ickafka.__version__ import version
 
 
 CAPTURED_MESSAGES = []
+
+
+def create_home_directory_folder():
+    """Creates a folder named .ickafka in user's home directory"""
+    home_directory = os.path.expanduser("~")
+    if not os.path.isdir("%s/.ickafka" % home_directory):
+        os.mkdir(os.path.join(home_directory, ".ickafka"))
+    if not os.path.isdir("%s/.ickafka/captures" % home_directory):
+        os.mkdir(os.path.join(home_directory, ".ickafka/captures"))
 
 
 def get_args():
@@ -78,8 +88,8 @@ def exit_handler():
     # If there are captured messages and the capture flag is set to true,
     # dump messages as a json array
     if CAPTURED_MESSAGES and USE_CAPTURE:
-        json_dumped_file = "{}/ickafka_capture_{}_{}.json".format(
-            os.getcwd(), KAFKA_TOPIC, datetime.utcnow().isoformat()
+        json_dumped_file = "{}/.ickafka/captures/{}_{}.json".format(
+            os.path.expanduser("~"), KAFKA_TOPIC, datetime.utcnow().isoformat()
         )
         print("")
         print("Dumping consumed messages into: %s" % json_dumped_file)
@@ -95,6 +105,7 @@ def exit_handler():
 atexit.register(exit_handler)
 
 try:
+    create_home_directory_folder()
     args = get_args()
     USE_CAPTURE = args.capture
     KAFKA_TOPIC = args.topic
