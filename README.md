@@ -4,7 +4,7 @@ A kafka consumer with color.
 
 [![Build Status](https://travis-ci.org/davegallant/ickafka.svg?branch=master)](https://travis-ci.org/davegallant/ickafka)
 
-![ickafka_demo](https://user-images.githubusercontent.com/4519234/47335349-d55e6700-d658-11e8-9552-260c56caa696.gif)
+![ickafka_gif](https://user-images.githubusercontent.com/4519234/47589203-7d648080-d936-11e8-8b05-b111d75c0ae4.gif)
 
 ## Installation
 
