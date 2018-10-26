@@ -12,7 +12,7 @@ with io.open(path.join(WORKING_DIR, "README.md"), encoding="utf-8") as f:
 
 setup(
     author="Dave Gallant",
-    description="Improved Color Kafka",
+    description="Improved Colored Kafka",
     entry_points={"console_scripts": ["ickafka=ickafka.cli:main"]},
     install_requires=["kafka-python>=1.3.1", "pygments>=2.2.0"],
     keywords=["kafka", "pygments"],

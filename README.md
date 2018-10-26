@@ -1,6 +1,6 @@
 # ickafka
 
-A kafka consumer with color.
+A kafka consumer with color. Name inspired by [icdiff](https://github.com/jeffkaufman/icdiff).
 
 [![Build Status](https://travis-ci.org/davegallant/ickafka.svg?branch=master)](https://travis-ci.org/davegallant/ickafka)
 [![PyPI version](https://badge.fury.io/py/ickafka.svg)](https://badge.fury.io/py/ickafka)
