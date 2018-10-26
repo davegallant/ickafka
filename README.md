@@ -3,6 +3,7 @@
 A kafka consumer with color.
 
 [![Build Status](https://travis-ci.org/davegallant/ickafka.svg?branch=master)](https://travis-ci.org/davegallant/ickafka)
+[![PyPI version](https://badge.fury.io/py/ickafka.svg)](https://badge.fury.io/py/ickafka)
 
 ![ickafka_gif](https://user-images.githubusercontent.com/4519234/47589203-7d648080-d936-11e8-8b05-b111d75c0ae4.gif)
 
