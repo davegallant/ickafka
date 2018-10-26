@@ -6,14 +6,14 @@
 ickafka - a kafka consumer with color
 ===================================
 
-.. image:: https://badge.fury.io/py/ickafka.svg
-    :target: https://badge.fury.io/py/ickafka
-
 .. image:: https://travis-ci.org/davegallant/ickafka.svg?branch=master
     :target: https://travis-ci.org/davegallant/ickafka
 
-.. figure:: https://user-images.githubusercontent.com/4519234/47335349-d55e6700-d658-11e8-9552-260c56caa696.gif
-   :alt: ickafka_demo
+.. image:: https://badge.fury.io/py/ickafka.svg
+    :target: https://badge.fury.io/py/ickafka
+
+.. figure:: https://user-images.githubusercontent.com/4519234/47589203-7d648080-d936-11e8-8b05-b111d75c0ae4.gif
+   :alt: ickafka_demo_gif
 
 Installation
 ------------
