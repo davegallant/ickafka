@@ -3,16 +3,14 @@
 import atexit
 import json
 import os
-import os.path
 import sys
 from datetime import datetime
 from kafka import KafkaConsumer
 from pygments import highlight
 from pygments.formatters import TerminalFormatter  # pylint: disable-msg=E0611
 from pygments.lexers import JsonLexer  # pylint: disable-msg=E0611
+from ickafka.config import create_config_dir, CAPTURES_FOLDER
 from ickafka.input import get_args
-from ickafka.config import create_config_dir
-
 
 args = get_args()
 messages_captured = []
@@ -54,8 +52,8 @@ def exit_handler():
     # If there are captured messages and the capture flag is set to true,
     # dump messages as a json array
     if messages_captured and args.capture:
-        json_dumped_file = "{}/.ickafka/captures/{}_{}.json".format(
-            os.path.expanduser("~"), args.topic, datetime.utcnow().isoformat()
+        json_dumped_file = "{}/{}_{}.json".format(
+            CAPTURES_FOLDER, args.topic, datetime.utcnow().isoformat()
         )
         print("")
         print("Dumping consumed messages into: %s" % json_dumped_file)
