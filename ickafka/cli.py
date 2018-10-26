@@ -11,7 +11,7 @@ from pygments import highlight
 from pygments.formatters import TerminalFormatter  # pylint: disable-msg=E0611
 from pygments.lexers import JsonLexer  # pylint: disable-msg=E0611
 from ickafka.input import get_args
-from ickafka.utils import create_ickafka_folder
+from ickafka.config import create_config_dir
 
 
 args = get_args()
@@ -71,7 +71,7 @@ def exit_handler():
 atexit.register(exit_handler)
 
 try:
-    create_ickafka_folder()
+    create_config_dir()
     start_consumer(arguments=args)
 
 except KeyboardInterrupt:
