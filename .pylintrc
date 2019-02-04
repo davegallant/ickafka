@@ -54,9 +54,6 @@ confidence=
 
 disable=
     attribute-defined-outside-init,
-    duplicate-code,
-    fixme,
-    invalid-name,
     missing-docstring,
     no-value-for-parameter,
     protected-access,

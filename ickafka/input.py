@@ -1,7 +1,7 @@
 """Parsing of CLI input (args)."""
 
 import argparse
-from ickafka.__version__ import version
+from ickafka.__version__ import VERSION
 
 
 def get_args():
@@ -25,7 +25,7 @@ def get_args():
         "-v",
         "--version",
         action="version",
-        version=version,
+        version=VERSION,
         help="ickafka version",
         default=None,
     )

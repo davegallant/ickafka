@@ -1,7 +1,7 @@
 import io  # for python2
 from os import path
 from setuptools import setup, find_packages
-from ickafka.__version__ import version
+from ickafka.__version__ import VERSION
 
 WORKING_DIR = path.abspath(path.dirname(__file__))
 
@@ -22,5 +22,5 @@ setup(
     name="ickafka",
     packages=find_packages(),
     url="https://github.com/davegallant/ickafka",
-    version=version,
+    version=VERSION,
 )
