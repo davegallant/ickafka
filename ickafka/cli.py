@@ -12,8 +12,8 @@ from pygments.lexers import JsonLexer  # pylint: disable-msg=E0611
 from ickafka.config import create_config_dir, CAPTURES_FOLDER
 from ickafka.input import get_args
 
-args = get_args()
-messages_captured = []
+ARGUMENTS = get_args()
+MESSAGES_CAPTURED = []
 
 
 def start_consumer(arguments):
@@ -37,40 +37,40 @@ def start_consumer(arguments):
                 print(message)
             else:
                 print(highlight(message, JsonLexer(), TerminalFormatter()))
-            messages_captured.append(json.loads(message))
+            MESSAGES_CAPTURED.append(json.loads(message))
         except Exception:  # pylint: disable=broad-except
             print(message)
-            messages_captured.append(message)
+            MESSAGES_CAPTURED.append(message)
         print("messages consumed: {}".format(count))
         print("")
 
 
 def exit_handler():
-    if not args.version:
+    if not ARGUMENTS.version:
         print("")
         print("Shutting down consumer...")
     # If there are captured messages and the capture flag is set to true,
     # dump messages as a json array
-    if messages_captured and args.capture:
+    if MESSAGES_CAPTURED and ARGUMENTS.capture:
         json_dumped_file = "{}/{}_{}.json".format(
-            CAPTURES_FOLDER, args.topic, datetime.utcnow().isoformat()
+            CAPTURES_FOLDER, ARGUMENTS.topic, datetime.utcnow().isoformat()
         )
         print("")
         print("Dumping consumed messages into: %s" % json_dumped_file)
         print("")
         with open(json_dumped_file, "w") as outfile:
-            json.dump(messages_captured, outfile, sort_keys=True, indent=4)
+            json.dump(MESSAGES_CAPTURED, outfile, sort_keys=True, indent=4)
     try:
-        sys.exit(0)
+        sys.exit(os.EX_OK)
     except SystemExit:
-        os._exit(0)
+        os._exit(os.EX_OK)
 
 
 atexit.register(exit_handler)
 
 try:
     create_config_dir()
-    start_consumer(arguments=args)
+    start_consumer(arguments=ARGUMENTS)
 
 except KeyboardInterrupt:
     exit_handler()
